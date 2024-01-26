@@ -2,6 +2,8 @@ import styles from './App.module.css';
 import { useState } from 'react';
 
 export const App = () => {
+		const NUMS = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0'];
+
 		const [operand1, setOperand1] = useState('');
 		const [operand2, setOperand2] = useState('');
 		const [operator, setOperator] = useState('');
@@ -59,37 +61,17 @@ export const App = () => {
 			setOperator('');
 		};
 
-	const buttonsData = [
-		{ text: '7', handler: handleNumClick, style: styles.key },
-		{ text: '8', handler: handleNumClick, style: styles.key },
-		{ text: '9', handler: handleNumClick, style: styles.key },
-		{ text: '4', handler: handleNumClick, style: styles.key },
-		{ text: '5', handler: handleNumClick, style: styles.key },
-		{ text: '6', handler: handleNumClick, style: styles.key },
-		{ text: '1', handler: handleNumClick, style: styles.key },
-		{ text: '2', handler: handleNumClick, style: styles.key },
-		{ text: '3', handler: handleNumClick, style: styles.key },
-		{ text: '0', handler: handleNumClick, style: styles.key },
-		{ text: 'C', handler: handleClear, style: styles.clear },
-		{ text: '+', handler: handleOperatorClick, style: styles.operator },
-		{ text: '-', handler: handleOperatorClick, style: styles.operator },
-		{ text: '=', handler: handleResult, style: styles.enter },
-	];
-
-	return (
+		return (
 			<div className={styles.app}>
 				<div className={styles.calculator}>
 					<div className={`${styles.output} ${isResult ? styles.result : ''}`}>{value}</div>
 					<div className={styles.keys}>
-						{buttonsData.map((button) => (
-							<button
-								key={button.text}
-								className={`${styles.key} ${button.style}`}
-								onClick={() => button.handler(button.text)}
-							>
-								{button.text}
-							</button>
-						))}
+						<button className={`${styles.key} ${styles.clear}`} onClick={handleClear}>C</button>
+						{NUMS.map((num) => <button className={ styles.key } key={num}
+												   onClick={() => handleNumClick(num)}>{num}</button>)}
+						<button className={`${styles.key} ${styles.operator}`} onClick={() => handleOperatorClick('+')}>+</button>
+						<button className={`${styles.key} ${styles.operator}`} onClick={() => handleOperatorClick('-')}>-</button>
+						<button className={`${styles.key} ${styles.enter}`} onClick={handleResult}>=</button>
 					</div>
 				</div>
 			</div>
